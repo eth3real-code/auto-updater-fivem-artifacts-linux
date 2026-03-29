@@ -26,20 +26,22 @@ Description=FiveM Service
 After=network.target
 
 [Service]
-ExecStart=/path/to/run.sh
+ExecStart=/path/to/run.sh #Edit with your FiveM FXServer Directory 
 User=fivem # your user
 Group=fivem # your group <- usually is you username.
 
 [Install]
 WantedBy=multi-user.target
 ```
-
 Now we have configured our service! Now our FiveM will run as a **service**!
-
 
 So let's refresh the **systemd** to allow our service to show.
 
 ```bash
 $ sudo systemctl daemon-reload
 ```
-Quick guide from https://raw.githubusercontent.com/Jonirulah/FiveM-Artifacts-Updater/refs/heads/main/README.md
+Service FiveM Quick guide Credits : https://raw.githubusercontent.com/Jonirulah/FiveM-Artifacts-Updater/refs/heads/main/README.md
+
+
+# Sudo permissions
+Your-fivem-os-user ALL=(ALL) NOPASSWD: /bin/systemctl restart fivem.service, /bin/systemctl start fivem.service, /bin/systemctl stop fivem.service # Replaces Your-fivem-os-user with your user!
