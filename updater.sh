@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #set -euo pipefail
-cd $HOME/FXServer # Edit this with your directory
+cd $HOME/FXServer
 
 BASE="https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/"
-OUT="fx.tar.xz"
+FILE="fx.tar.xz"
 TMP_HTML="$(mktemp)"
 trap 'rm -f "$TMP_HTML"' EXIT
 
@@ -19,10 +19,7 @@ if [[ -z "$URL" || ! $URL =~ ^https:// ]]; then
 fi
 
 echo "Downloading: $URL"
-wget -q --show-progress -O "$OUT" "$URL"
-
-# Map $FILE to $OUT for the block integration
-FILE="$OUT"
+wget -q --show-progress -O "$FILE" "$URL"
 
 if [ -f "$FILE" ]; then
   echo "Checking if it's an XZ file using the 'file' command"
@@ -42,7 +39,7 @@ if [ -f "$FILE" ]; then
     fi
 
     echo "Extracing the tarball (creates alpine/ or appropriate files)..."
-    tar xf "$OUT"
+    tar xf "$FILE"
   else
     echo "Error: File $FILE is not an XZ compressed data archive."
     exit 1
